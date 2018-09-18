@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <link rel="shortcut icon" href="pokeball.png" type="image/x-icon">
+    <title>Your Choice</title>
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+  </head>
+  <body class="branched">
+
+
+    <button class="getAbility" style="margin:30px;"> Get Poke Abilities </button>
+
+    <div class="linked">
+
+
+    </div>
+
+    <div class="output" style="margin:20px;">
+      <h2 class="choiceName" style="display:inline;">Your Choice Is :</h2>
+    </div>
+
+
+   <script type="text/javascript">
+
+   let searchParams = new URLSearchParams(window.location.search);
+   searchParams.has('name');
+   let param = searchParams.get('name');
+   $('.output').append("<h3 style='color:blue;display:inline; padding-left:10px;'>" +param+  " .</h3>");
+
+   $(".getAbility").click(function(data){
+     var pokeURL = "https://pokeapi.co/api/v2/pokemon/"+param+"/";
+     $.getJSON(pokeURL, function(data){
+         var abilities = data.abilities;
+         for(var i=0; i<abilities.length; i++){
+           console.log(abilities[i].ability.name);
+           var nameObj = abilities[i].ability.name;
+           var appendEl = "<h2>Your Poke  <span style='color:blue;'>"+param+"</span> Has This Ability <span style='color:green;'>"+nameObj + " .</span></h2> <br/>";
+           $('.output').append(appendEl);
+         }
+
+  });
+});
+   </script>
+
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="poke-name.js"></script>
+
+  </body>
+</html>
